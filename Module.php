@@ -2,8 +2,19 @@
 
 namespace TccZendLoggerPsr;
 
-class Module
+use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\ModuleManager\Feature\ServiceProviderInterface;
+
+class Module implements AutoloaderProviderInterface, ServiceProviderInterface
 {
+    public function getServiceConfig() {
+        return [
+            'factories' => [
+                'tcc_logger' => 'TccZendLoggerPsr\Factory\LoggerFactory'
+            ]
+        ];
+    }
+
     public function getAutoloaderConfig()
     {
         return array(
